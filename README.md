@@ -1,100 +1,107 @@
-# Dotfiles for Mac Terminal Setup
+# 🌟 Dotfiles for macOS Terminal (Bash + Zsh)
 
-## Overview
+Modern, modular, and cross-shell dotfiles setup designed for developers who work across **Bash**, **Zsh**, and tools like **iTerm** or **Wrap Terminal**. Provides a unified experience with intelligent autocompletion, prompt theming, and version managers—all stored neatly in `~/.dotfiles`.
 
-This repository contains a modular and modern setup for managing your Bash and Zsh environments on macOS. It includes support for plugin managers, prompt theming, font installation, and reusable functions.
+---
 
-## Shell Configuration Summary
+## 📦 Features at a Glance
 
-| Shell                     | Plugins           | Theme Engine                    | Prompt Enhancer | Status |
-| ------------------------- | ----------------- | ------------------------------- | --------------- | ------ |
-| **Bash**                  | Bash-it           | Oh My Posh (`kushal.omp.json`)  | Starship        | ✅     |
-| **Zsh**                   | Oh My Zsh         | Oh My Posh (`1_shell.omp.json`) | Starship        | ✅     |
-| **iTerm / Wrap Terminal** | Inherits Bash/Zsh | Shared Config                   | Shared Config   | ✅     |
+| Shell                     | Plugin Manager    | Prompt Theme                  | Prompt Enhancer | Status |
+| ------------------------- | ----------------- | ----------------------------- | --------------- | ------ |
+| **Bash**                  | \[Bash-it]        | Oh My Posh `kushal.omp.json`  | Starship        | ✅     |
+| **Zsh**                   | \[Oh My Zsh]      | Oh My Posh `1_shell.omp.json` | Starship        | ✅     |
+| **iTerm / Wrap Terminal** | Inherits Bash/Zsh | Shared Config                 | Shared Config   | ✅     |
 
-## Folder Structure
+---
+
+## 🗂 Folder Structure
 
 ```sh
 ~/.dotfiles/
 ├── aliases.sh             # Common shell aliases
-├── completion.sh          # Bash-specific autocompletions
-├── exports.sh             # Environment variables and $PATH
-├── extra_init.sh          # Loads starship + oh-my-posh dynamically
-├── functions.sh           # Utility functions: mkcd, extract, etc.
-├── fonts/                 # Custom nerd fonts
-├── install_fonts.sh       # Font installer script
-└── set_terminal_font.scpt # AppleScript to set Terminal font
+├── completion.sh          # Autocompletion for bash & zsh
+├── exports.sh             # Environment variables (PATH, LANG, EDITOR)
+├── extra_init.sh          # Prompt, theme, version managers
+├── functions.sh           # Handy functions: mkcd, extract, etc.
+├── install_fonts.sh       # Script to install Nerd Fonts
+├── set_terminal_font.scpt # AppleScript to apply font to Terminal
+├── fonts/                 # Nerd Font files (Meslo recommended)
+├── bashrc                 # Symlinked to ~/.bashrc
+└── zshrc                  # Symlinked to ~/.zshrc
 ```
 
-## Features
+---
 
-### ✅ Aliases (`aliases.sh`)
+## 🧩 Components
 
-- Git shortcuts (`gs`, `gl`, `gp`, etc.)
-- Directory movement (`..`, `...`, etc.)
+### ✅ `aliases.sh`
 
-### ✅ Completions (`completion.sh`)
+- Shortcuts for Git, Docker, navigation, and custom scripts.
 
-- Loads Homebrew's `bash_completion` if Bash is detected.
+### ✅ `completion.sh`
 
-### ✅ Exports (`exports.sh`)
+- Cross-shell completion using Homebrew tools.
+- Auto-loads completions for `git`, `docker`, `node`, `nvm`, `pyenv`, `rbenv`, `go`, `rust`, and more.
 
-- Appends `/opt/homebrew/bin` and `$HOME/bin` to `$PATH`
-- Sets `LANG` and `EDITOR` (VS Code with `code -w`)
+### ✅ `exports.sh`
 
-### ✅ Extra Init (`extra_init.sh`)
+- Sets `PATH`, `LANG`, and `EDITOR=code -w` for VSCode.
 
-- Dynamically loads `starship` and `oh-my-posh` per shell type
-- Bash uses `kushal.omp.json`, Zsh uses `1_shell.omp.json`
+### ✅ `extra_init.sh`
 
-### ✅ Functions (`functions.sh`)
+- Dynamically detects shell and loads:
 
-- `mkcd`: Create and `cd` into a directory
-- `extract`: Decompress archives (`.zip`, `.tar.gz`, etc.)
+  - Oh My Posh themes (`kushal.omp.json` for Bash, `1_shell.omp.json` for Zsh)
+  - Fallbacks to Starship if Oh My Posh is not available.
+  - Initializes `nvm`, `pyenv`, `rbenv`, `rustup`, `go`, and `bun`.
 
-### ✅ Fonts (`fonts/` + `install_fonts.sh`)
+### ✅ `functions.sh`
 
-- Install custom Nerd Fonts to `~/Library/Fonts`
-- Includes MesloLGS Nerd Font for proper glyph support
+- `mkcd <dir>`: Make and cd into directory.
+- `extract <file>`: Automatically decompress `.zip`, `.tar.gz`, `.7z`, etc.
 
-### ✅ AppleScript Font Setter (`set_terminal_font.scpt`)
+### ✅ Nerd Fonts
 
-- Automatically sets macOS Terminal font to MesloLGS Nerd Font
-- Targets the current profile (e.g. "Basic")
+- Fonts (MesloLGS Nerd Font) installed via script into `~/Library/Fonts`.
+- AppleScript sets the terminal font programmatically.
 
-## Installation
+---
 
-### 1. Clone the Repo
+## 🛠 Setup Guide
 
-```sh
-git clone https://github.com/your-username/your-dotfiles-repo.git ~/.dotfiles
+### 1. Clone the Dotfiles
+
+```bash
+git clone https://github.com/your-username/dotfiles.git ~/.dotfiles
 ```
 
-### 2. Install Fonts
+### 2. Link Shell Configs
 
-```sh
+```bash
+ln -sf ~/.dotfiles/bashrc ~/.bashrc
+ln -sf ~/.dotfiles/zshrc ~/.zshrc
+```
+
+### 3. Install Fonts
+
+```bash
 bash ~/.dotfiles/install_fonts.sh
 osascript ~/.dotfiles/set_terminal_font.scpt
 ```
 
-### 3. Source Your Shell
+### 4. Install Required Tools
 
-Ensure your `.bashrc` or `.zshrc` includes:
-
-```sh
-# ~/.bashrc or ~/.zshrc
-[ -f ~/.dotfiles/exports.sh ]     && source ~/.dotfiles/exports.sh
-[ -f ~/.dotfiles/aliases.sh ]     && source ~/.dotfiles/aliases.sh
-[ -f ~/.dotfiles/functions.sh ]   && source ~/.dotfiles/functions.sh
-[ -f ~/.dotfiles/completion.sh ]  && source ~/.dotfiles/completion.sh
-[ -f ~/.dotfiles/extra_init.sh ]  && source ~/.dotfiles/extra_init.sh
+```bash
+brew install starship oh-my-posh
+brew install bash-completion zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+brew install nvm pyenv rbenv go rustup-init
 ```
 
-### 4. Optional: Bash-it (Bash Plugin Manager)
+> ✅ Run `rustup default stable` and `mkdir ~/.nvm` after install if needed.
 
-Install and enable desired plugins:
+### 5. Enable Bash-it (optional)
 
-```sh
+```bash
 git clone --depth=1 https://github.com/Bash-it/bash-it.git ~/.bash_it
 ~/.bash_it/install.sh --silent
 bash-it enable plugin git
@@ -102,27 +109,37 @@ bash-it enable completion git
 bash-it enable alias general
 ```
 
-### 5. Tools to Install
+---
 
-```sh
-brew install starship oh-my-posh
-```
+## 🎨 Prompt Preview
 
-## Prompt Previews
-
-```sh
+```bash
 oh-my-posh print primary --config ~/.poshthemes/kushal.omp.json  # Bash
 oh-my-posh print primary --config ~/.poshthemes/1_shell.omp.json # Zsh
 ```
 
 ---
 
-## License
+## 🧪 Verify Setup
 
-MIT
+From both Bash and Zsh:
+
+```bash
+which starship
+which oh-my-posh
+nvm -v
+pyenv --version
+rbenv --version
+rustc --version
+```
 
 ---
 
-## Author
+## 👨‍💻 Author
 
-Tahmid Bint Aslim Rafi
+**Tahmid Bint Aslim Rafi**
+MIT Licensed
+
+> Suggestions and PRs are welcome to extend support for Linux/WSL, Kitty, or Windows Terminal profiles.
+
+---
