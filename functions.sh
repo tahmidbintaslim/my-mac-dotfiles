@@ -4,19 +4,29 @@ mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
-# Simple bashmarks clone
-bookmark() {
-  echo "cd \"$PWD\"" > "$HOME/.bookmarks/$1"
-  chmod +x "$HOME/.bookmarks/$1"
-}
+# # Bookmark current dir with name
+# bookmark() {
+#   local markdir="$HOME/.bookmarks"
+#   mkdir -p "$markdir"
+#   local name="$1"
+#   if [[ -z "$name" ]]; then
+#     echo "Usage: bookmark <name>"
+#     return 1
+#   fi
+#   echo "cd \"$(pwd)\"" > "$markdir/$name"
+#   chmod +x "$markdir/$name"
+# }
 
-go() {
-  if [ -f "$HOME/.bookmarks/$1" ]; then
-    source "$HOME/.bookmarks/$1"
-  else
-    echo "Bookmark '$1' not found"
-  fi
-}
+# # Jump to bookmarked dir
+# go() {
+#   local markdir="$HOME/.bookmarks"
+#   local name="$1"
+#   if [[ -f "$markdir/$name" ]]; then
+#     source "$markdir/$name"
+#   else
+#     echo "Bookmark '$name' not found"
+#   fi
+# }
 
 extract() {
   if [[ -f "$1" ]]; then
