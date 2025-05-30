@@ -76,3 +76,6 @@ elif [[ -f "$(brew --prefix rustup)/etc/bash_completion.d/rustup" ]]; then
   source "$(brew --prefix rustup)/etc/bash_completion.d/rustup"
   export PATH="$(brew --prefix rustup)/bin:$PATH"
 fi
+
+# Load autoupdate logic
+[[ -f ~/.dotfiles/autoupdate_init.sh ]] && source ~/.dotfiles/autoupdate_init.sh
