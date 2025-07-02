@@ -1,0 +1,7 @@
+[user]
+  name = tahmidbintaslim
+  email = tahmidbintaslimrafi@gmail.com
+[core]
+  editor = code --wait
+[credential]
+  helper = osxkeychain
