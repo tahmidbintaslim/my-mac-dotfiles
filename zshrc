@@ -1,9 +1,20 @@
 # ~/.zshrc
 
 # Oh My Zsh for plugin support (themes are disabled in favor of Oh My Posh)
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$HOME/.dotfiles/oh-my-zsh"
 ZSH_THEME=""  # disable Oh My Zsh's default theme
-plugins=(git)
+plugins=(
+  git
+  docker
+  kubectl
+  node
+  npm
+  yarn
+  python
+  ruby
+  golang
+  rust
+)
 source $ZSH/oh-my-zsh.sh
 
 # Load universal dotfiles

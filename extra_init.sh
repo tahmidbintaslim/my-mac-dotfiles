@@ -9,9 +9,9 @@ CURRENT_SHELL=$(basename "$SHELL")
 
 if command -v oh-my-posh &>/dev/null; then
   if [[ -n "$ZSH_VERSION" ]]; then
-    eval "$(oh-my-posh init zsh --config ~/.poshthemes/1_shell.omp.json)"
+    eval "$(oh-my-posh init zsh --config ~/.dotfiles/oh-my-posh-themes/themes/1_shell.omp.json)"
   elif [[ -n "$BASH_VERSION" ]]; then
-    eval "$(oh-my-posh init bash --config ~/.poshthemes/kushal.omp.json)"
+    eval "$(oh-my-posh init bash --config ~/.dotfiles/oh-my-posh-themes/themes/kushal.omp.json)"
   fi
 elif command -v starship &>/dev/null; then
   eval "$(starship init "$CURRENT_SHELL")"

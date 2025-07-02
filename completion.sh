@@ -12,7 +12,14 @@ mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 if [[ -n "$BASH_VERSION" ]]; then
   [[ -f /opt/homebrew/etc/profile.d/bash_completion.sh ]] && source /opt/homebrew/etc/profile.d/bash_completion.sh
   [[ -f /opt/homebrew/etc/bash_completion ]] && source /opt/homebrew/etc/bash_completion
+
+  # Load bash-preexec first
+  [[ -f /opt/homebrew/opt/bash-preexec/share/bash-preexec/bash-preexec.sh ]] && source /opt/homebrew/opt/bash-preexec/share/bash-preexec/bash-preexec.sh
+
+  # Then load bash-autosuggestions
+  [[ -f "$HOME/.dotfiles/bash-autosuggestions/bash-autosuggestions.sh" ]] && source "$HOME/.dotfiles/bash-autosuggestions/bash-autosuggestions.sh"
 fi
+
 
 # -------------------------
 # --- Zsh Completion ------

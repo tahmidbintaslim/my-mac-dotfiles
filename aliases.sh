@@ -9,3 +9,5 @@ alias gp='git push'
 alias gl='git log --oneline --graph --all'
 alias ..='cd ..'
 alias ...='cd ../..'
+# Use bat instead of cat for file viewing, with syntax highlighting
+alias cat="bat"
